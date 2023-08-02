@@ -1,2 +1,2 @@
 # cloudmon
-simple flaskapp to monitor endpoint reachbility
+simple flaskapp to monitor endpoint reachability.
