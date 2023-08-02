@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div style="padding-left:16px">
+    <h2>Cisco Cloud Network Controller Lab Monitoring</h2>
+    <p>Cloud endpoints reachability status.</p>
+</div>
+
+<table class="GeneratedTable">
+    <thead>
+        <tr>
+            <th>Host</th>
+            <th>Status</th>
+            <th>EPG</th>
+            <th>Cloud</th>
+            <th>Region</th>
+            <th>Security Group</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for target in targetsInfo %}
+        <tr>
+            <td>{{ target["host"] }}</td>
+            {% if target["status"] == 'Up' %}
+            <td style="text-align: center"><img src="/static/images/Up.png"></td>
+            {% elif target["status"] == 'Down' %}
+            <td style="text-align: center"><img src="/static/images/Down.png"></td>
+            {% endif %}
+            <td>{{ target["epg"] }}</td>
+
+            {% if target["cloud"] == 'AWS' %}
+            <td><img src="/static/images/aws.png"></td>
+            {% elif target["cloud"] == 'Azure' %}
+            <td><img src="/static/images/azure.png"></td>
+            {% elif target["cloud"] == 'GCP' %}
+            <td><img src="/static/images/gcp.png"></td>
+            {% else %}
+            <td><img src="/static/images/onprem.png"></td>
+            {% endif %}
+
+            <td>{{ target["region"] }}</td>
+            <td>{{ target["sg"] }}</td>
+        </tr>
+        {% endfor %}
+
+    </tbody>
+</table>
+
+{% endblock %}
